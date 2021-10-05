@@ -83,10 +83,10 @@ jobs:
         cd $GCCDIR
         contrib/download_prerequisites
         ./configure --prefix=/usr/local/$GCCVER --enable-languages=c,c++,go --enable-checking=release --with-system-zlib --enable-multilib --program-suffix=$GCCPROGRAM --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --disable-werror --with-target-system-zlib=auto --with-pkgversion=liangjc@ubuntu_20.04
-        make -j$(nproc)
+        sudo make -j$(nproc)
         sudo checkinstall -D make install
         cd ..
-        mkdir -p gcc_finish
+        sudo mkdir -p gcc_finish
         sudo cp -a *.deb gcc_finish
 
     - name: 上传到release
