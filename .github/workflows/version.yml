@@ -73,10 +73,18 @@ jobs:
     - name: 查看各种信息
       run: |
         echo "系统："
+        echo ""
         cat /etc/os-release
         echo "编译器"
+        echo ""
         gcc -v
         echo "处理后磁盘容量"
+        echo ""
         df -Th
         echo "CPU信息"
+        echo ""
         cat /proc/cpuinfo
+        echo "查看硬盘"
+        echo ""
+        sudo fdisk -l
+
