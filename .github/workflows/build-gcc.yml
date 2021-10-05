@@ -85,20 +85,25 @@ jobs:
         cd ..
         mkdir -p gcc_build
         cd gcc_build
-        ../$GCCDIRconfigure --prefix=/usr/local/$GCCVER --enable-languages=c,c++,go --enable-checking=release --with-system-zlib --enable-multilib --program-suffix=$GCCPROGRAM --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --disable-werror --with-target-system-zlib=auto --with-pkgversion=liangjc@ubuntu_20.041
+        $PWD/../$GCCDIRconfigure --prefix=/usr/local/$GCCVER --enable-languages=c,c++,go --enable-checking=release --with-system-zlib --enable-multilib --program-suffix=$GCCPROGRAM --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --disable-werror --with-target-system-zlib=auto --with-pkgversion=liangjc@ubuntu_20.041
         make -j$(nproc)
-        sudo checkinstall -D make install
+        sudo checkinstall -D --maintainer=liangjc@ubuntu_2004 --pkgname=gcc-11 --pkgrelease=1 --pkglicense=GPL --nodoc
         cd ..
         mkdir -p gcc_finish
         sudo cp -a *.deb gcc_finish
 
-    - name: 上传到release
-      uses: svenstaro/upload-release-action@v2
-      if: env.UPLOAD_RELEASES == 'true' && !cancelled()
+#    - name: 上传到release
+#      uses: svenstaro/upload-release-action@v2
+#      if: env.UPLOAD_RELEASES == 'true' && !cancelled()
+#      with:
+#        repo_token: ${{ secrets.GITHUB_TOKEN }}
+#        file: gcc_finish/*
+#        file_glob: true
+#        tag: gcc-releases-11
+#        overwrite: true
+#
+    - name : 上传到artifact
+      uses: actions/upload-artifact@main
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: gcc_finish/*
-        file_glob: true
-        tag: gcc-releases
-        overwrite: true
-
+        name: gcc-release-11.2.0
+        path: gcc_finish
