@@ -25,7 +25,7 @@ on:
 
 jobs:
   building:
-    runs-on: debian-11
+    runs-on: debian-latest
 
     steps:
     - name: 检查
