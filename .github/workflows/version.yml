@@ -25,7 +25,7 @@ on:
 
 jobs:
   building:
-    runs-on: ubuntu-20.04
+    runs-on: debian-11
 
     steps:
     - name: 检查
@@ -87,4 +87,6 @@ jobs:
         echo "查看硬盘"
         echo ""
         sudo fdisk -l
+        echo ""
+        echo $PWD
 
