@@ -61,7 +61,8 @@ jobs:
       run: |
         cd ~
         GCCNAME=gcc-11.2.0.tar.gz
-        wget -O $GCCNAME https://github.com/gcc-mirror/gcc/archive/refs/tags/releases/gcc-11.2.0.tar.gz
+        wget -O $GCCNAME https://mirrors.aliyun.com/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz
+        #wget -O $GCCNAME https://github.com/gcc-mirror/gcc/archive/refs/tags/releases/gcc-11.2.0.tar.gz
         tar -xf $GCCNAME
         GCCDIR=$PWD/`tar -tf gcc-*.tar.gz | head -1`
         GCCVER=`echo $GCCNAME | cut -d "." -f1`
